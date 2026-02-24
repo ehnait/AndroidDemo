@@ -1,0 +1,12 @@
+{
+	"area" : "aa",
+	"pkg" : "com.xxx.xx",
+	"appName" : "xxx",
+	"questChannel" : "a123",
+	"keyAlias" : "xxxx",
+    "defaultUrl" : "https://xxxx/",
+	"apiServer" : "https://xxx/"	,
+	"versionCode" : 100,
+	"versionName" : "1.0.0"
+
+}

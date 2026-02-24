@@ -1,131 +1,172 @@
-//apply(from = "../ktlint.gradle.kts")
+import groovy.json.JsonSlurper
+
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-android-extensions")
-    id("kotlin-kapt")
-    id("androidx.navigation.safeargs.kotlin")
-    id("com.mob.sdk")
-}
-MobSDK {
-    appKey(findProperty("MobSDK_Key").toString())
-    appSecret(findProperty("MobSDK_Secret").toString())
-    SMSSDK { }
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt.android)
 }
 
+if (getChannelConfigs().any { it.second["firebase"] == true }) {
+    apply(plugin = "com.google.gms.google-services")
+}
+
+var _cachedChannelConfigs: List<Pair<String, Map<String, Any>>>? = null
+
+fun getChannelConfigs(): List<Pair<String, Map<String, Any>>> {
+    if (_cachedChannelConfigs == null) {
+        val channelDir = File(rootProject.projectDir, "channel")
+        _cachedChannelConfigs = channelDir.listFiles()?.filter { it.isDirectory }?.mapNotNull { channelFolder ->
+            val configFile = File(channelFolder, "buildconfig.json")
+            configFile.takeIf { it.exists() }?.let {
+                channelFolder.name to JsonSlurper().parse(it) as Map<String, Any>
+            }
+        } ?: emptyList()
+    }
+    return _cachedChannelConfigs!!
+}
+
+
 android {
-    compileSdkVersion(Versions.compileSdk)
+    namespace = "com.b.a2"
+    compileSdk = libs.versions.compileSdk.get().toInt()
+
     defaultConfig {
-        applicationId = ApplicationId.id
-        minSdkVersion(Versions.minSdk)
-        targetSdkVersion(Versions.targetSdk)
-        versionCode = Releases.versionCode
-        versionName = Releases.versionName
-        multiDexEnabled = true
+        applicationId = "com.b.a2"
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
+        versionCode = 1
+        versionName = "1.0"
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        ndk {
-            abiFilters("armeabi-v7a", "arm64-v8a")
-        }
     }
 
     signingConfigs {
-        getByName("debug") {
-            storeFile = file(properties["KeyStoreFile"].toString())
-            storePassword = properties["KeyStorePass"].toString()
-            keyAlias = properties["KeyStoreAlias"].toString()
-            keyPassword = properties["KeyStorePass"].toString()
-        }
+        getChannelConfigs().forEach { (folderName, config) ->
+            create(folderName) {
+                storeFile = File(rootProject.projectDir, "channel/$folderName/key.keystore")
+                storePassword = "123456"
+                keyAlias = config["keyAlias"] as String
+                keyPassword = "123456"
 
-        create("release") {
-            storeFile = file(properties["KeyStoreFile"].toString())
-            storePassword = properties["KeyStorePass"].toString()
-            keyAlias = properties["KeyStoreAlias"].toString()
-            keyPassword = properties["KeyStorePass"].toString()
-        }
-    }
-
-    buildTypes {
-        getByName("debug") {
-            isDebuggable = true
-            isJniDebuggable = true
-            isMinifyEnabled = false
-            isShrinkResources = false
-            isZipAlignEnabled = false
-            applicationIdSuffix = ".debug"
-            signingConfig = signingConfigs.getByName("debug")
-        }
-
-        getByName("release") {
-            isDebuggable = false
-            isJniDebuggable = false
-            isMinifyEnabled = true
-            isShrinkResources = true
-            isZipAlignEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-            signingConfig = signingConfigs.getByName("release")
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-    tasks.withType<JavaCompile> {
-        options.encoding = "UTF-8"
-    }
-
-    android.applicationVariants.all {
-        outputs.all {
-            if (this is com.android.build.gradle.internal.api.ApkVariantOutputImpl) {
-                this.outputFileName = "graduation@app_$versionName.apk"
-
+                enableV1Signing = true
+                enableV2Signing = true
             }
         }
     }
 
-}
-dependencies {
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
-    // Test
-    testImplementation("junit:junit:4.12")
-    androidTestImplementation("androidx.test.ext:junit:1.1.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
-    // KOTLIN
-    implementation(KotlinLibraries.kotlin)
-    implementation(KotlinLibraries.coreKtx)
-    implementation(KotlinLibraries.kotlinCoroutineCore)
-    implementation(KotlinLibraries.kotlinCoroutineAndroid)
-    // ANDROID
-    implementation(AndroidLibraries.appCompat)
-    implementation(AndroidLibraries.lifecycleRuntime)
-    implementation(AndroidLibraries.lifecycleLiveData)
-    implementation(AndroidLibraries.lifecycleViewModel)
-    implementation(AndroidLibraries.lifecycleRoomRuntime)
-    kapt(AndroidLibraries.lifecycleRoomCompiler)
-    implementation(AndroidLibraries.lifecycleRoomkKtx)
-    implementation(AndroidLibraries.multidex)
-    implementation(AndroidLibraries.constraintLayout)
-    implementation(AndroidLibraries.recyclerView)
-    implementation(AndroidLibraries.navigationFragment_ktx)
-    implementation(AndroidLibraries.navigationUi_ktx)
-    implementation(AndroidLibraries.material)
-    //Libraries
-    implementation(OtherLibraries.coil)
-    implementation(OtherLibraries.lottie)
-    implementation(OtherLibraries.BaseRecyclerViewAdapterHelper)
-    implementation(OtherLibraries.GSYVideoPlayer)
-    //project
-    implementation(project(Modules.common))
-    implementation(project(Modules.http))
+    flavorDimensions += "country"
+    productFlavors {
+        getChannelConfigs().forEach { (folderName, config) ->
+            create(folderName) {
+                dimension = "country"
+                applicationId = config["pkg"] as String
+                versionCode = (config["versionCode"] as? Int) ?: 100
+                versionName = (config["versionName"] as? String) ?: "1.0.0"
+                signingConfig = signingConfigs.getByName(folderName)
 
-//    implementation("androidx.vectordrawable:vectordrawable:1.1.0")
+                resValue("string", "app_name", config["appName"] as String)
+
+                buildConfigField("String", "CHANNEL", "\"${folderName}\"")
+                buildConfigField("String", "QUEST_CHANNEL", "\"${config["questChannel"]}\"")
+                buildConfigField("String", "AREA", "\"${config["area"]}\"")
+                buildConfigField("boolean", "SANDBOX", "${config["sandbox"] ?: false}")
+                buildConfigField("String", "DEFAULT_URL", "\"${config["defaultUrl"]}\"")
+                buildConfigField("String", "API_SERVER", "\"${config["apiServer"]}\"")
+            }
+        }
+    }
+
+    sourceSets {
+        getChannelConfigs().forEach { (folderName, _) ->
+            getByName(folderName) {
+                setRoot("${rootProject.projectDir}/channel/${folderName}")
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            isDebuggable = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        debug {
+            isMinifyEnabled = false
+            isDebuggable = true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+    buildFeatures {
+        buildConfig = true
+        viewBinding = true
+    }
+
+    applicationVariants.all {
+        val variantName = name
+        val flavorName = flavorName
+        val config = getChannelConfigs().find { it.first == flavorName }?.second
+
+        val googleTask = tasks.matching { it.name.contains("GoogleServices") && it.name.contains(variantName, ignoreCase = true) }
+
+//        if (config?.get("firebase") != true) {
+//            googleTask.configureEach {
+//                enabled = false
+//            }
+//        } else {
+//            // Copy google-services.json for Firebase-enabled flavors
+//            googleTask.configureEach {
+//                doFirst {
+//                    val jsonFile = File(rootProject.projectDir, "channel/$flavorName/google-services.json")
+//                    if (jsonFile.exists()) {
+//                        println("Copying google-services.json from ${jsonFile.absolutePath} to app/")
+//                        copy {
+//                            from(jsonFile)
+//                            into(projectDir)
+//                        }
+//                    } else {
+//                        println("Warning: google-services.json not found at ${jsonFile.absolutePath}")
+//                    }
+//                }
+//            }
+//        }
+    }
+}
+
+dependencies {
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.constraintlayout)
+    kapt(libs.hilt.compiler)
+    implementation(libs.coil)
+    implementation(libs.coil.gif)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.adjust.android)
+    implementation(libs.installreferrer)
+    implementation(libs.androidx.browser)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+
+}
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }
 

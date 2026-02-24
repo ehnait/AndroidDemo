@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!-- 背景图 -->
+    <ImageView
+        android:id="@+id/img_splash_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_splash_bg" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="110dp">
+        <!-- LOGO GIF 动画 -->
+        <ImageView
+            android:id="@+id/img_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:contentDescription="@null"
+            tools:src="@drawable/img_logo" />
+
+        <!-- 进度条和百分比 -->
+        <RelativeLayout
+            android:id="@+id/progress_percent_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp">
+            <!-- 跳动豆子 GIF，初始在最左侧 -->
+            <ImageView
+                android:id="@+id/img_progress_icon"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:contentDescription="@null"
+                tools:src="@drawable/dl_progress_icon" />
+
+
+            <LinearLayout
+                android:id="@+id/progress_bar_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_progress_icon"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <!-- ProgressBar -->
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="260dp"
+                    android:layout_height="10dp"
+                    android:max="100"
+                    android:progressDrawable="@drawable/bg_progress_bar"
+                    tools:progress="75" />
+
+                <!-- 百分比 -->
+                <TextView
+                    android:id="@+id/tv_progress_percent"
+                    android:layout_width="38dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/alibaba_puhuiti_medium"
+                    android:text="0%"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
+            <!-- 进度描述 -->
+            <TextView
+                android:id="@+id/tv_progress_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/progress_bar_container"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/alibaba_puhuiti_medium"
+                android:text="@string/connecting"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <!-- Footer内容 -->
+    <LinearLayout
+        android:id="@+id/footer_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="24dp">
+
+        <!-- 供应商图片行 -->
+        <LinearLayout
+            android:id="@+id/supplier_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                tools:src="@drawable/img_supplier_gcb" />
+
+            <Space
+                android:layout_width="24dp"
+                android:layout_height="0dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                tools:src="@drawable/img_supplier_siq" />
+
+            <Space
+                android:layout_width="24dp"
+                android:layout_height="0dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                tools:src="@drawable/img_supplier_tether" />
+
+            <Space
+                android:layout_width="24dp"
+                android:layout_height="0dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                tools:src="@drawable/img_supplier_pix" />
+        </LinearLayout>
+
+        <!-- 版权文字 -->
+        <TextView
+            android:id="@+id/tv_copyright"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/alibaba_puhuiti_regular"
+            android:gravity="center"
+            tools:text="@string/copyright"
+            android:textColor="@color/secondary"
+            android:textSize="12sp" />
+    </LinearLayout>
+</RelativeLayout>

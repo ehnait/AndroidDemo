@@ -1,25 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFFFFF</color>
-    <color name="colorPrimaryDark">#FFFFFF</color>
-    <color name="colorAccent">#3F51B5</color>
-    <color name="colorAccentTransparent">#CC3F51B5</color>
+    <!-- 主题色定义 -->
+    <color name="primary">#FEBE1A</color> <!-- 主色 -->
+    <color name="onPrimary">#10131B</color> <!-- 主色上的色 -->
+    <color name="primaryContainer">#FFF291</color>
+    <color name="secondary">#B3BCC9</color>
+    <color name="background">#10131B</color>
+    <color name="onBackground">#1E232F</color>
+    <color name="error">#FF4949</color>
+    <color name="onError">#1E232F</color>
+    <color name="success">#3AFE1A</color>
 
-    <!--background-->
-    <color name="colorWindowBackground">#FFFFFF</color>
-    <color name="colorTintBackground">#000000</color>
-    <!--button-->
-    <color name="colorButtonPrimary">#45C139</color>
-    <color name="colorButtonPrimaryTransparent">#CC45C139</color>
-    <color name="colorButtonSecondary">#D1FF45</color>
-    <color name="colorButtonSecondaryTransparent">#CCD1FF45</color>
-    <color name="colorButtonInvalid">#32D1FF45</color>
 
-    <!--text-->
-    <color name="colorTextPrimary">#000000</color>
-    <color name="colorTextPrimaryTransparent">#CC000000</color>
-    <color name="colorTextPrimaryInvalid">#33000000</color>
-    <color name="colorTextSecondary">#838485</color>
-    <color name="colorTextSecondaryVariant">#9C27B0</color>
-    <color name="colorTextSecondaryVariantTransparent">#CC9C27B0</color>
+    <color name="white">#FFF</color>
 </resources>

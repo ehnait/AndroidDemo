@@ -1,31 +1,17 @@
-# FastAndroid （updating...）
+语言与构建：Kotlin 2.0、Java 11、AGP 8.5、Version Catalog、compileSdk/minSdk/targetSdk。
 
-- ### 快速搭建一个Kotiln项目。迁移Gradle脚本至 KTS，项目使用协程（Coroutine）进行线程调度，retrofit2+http3+gson网络请求，coil进行图像加载并使用了jetpack组件LiveData、ViewModel、Room、Navigation。
+核心框架：AndroidX（Core、AppCompat、Activity、Lifecycle）、ConstraintLayout、ViewBinding。
 
-    <br/>
-- ## AS常用插件（plugins）
-  
-  - [ADB Idea](https://plugins.jetbrains.com/plugin/7380-adb-idea)
-  - [Android Drawable Preview](https://plugins.jetbrains.com/plugin/10730-android-drawable-preview)
-  - [ADB Idea](https://plugins.jetbrains.com/plugin/7380-adb-idea)
-  - [BugKotlinDocument](https://plugins.jetbrains.com/plugin/9781-bugkotlindocument)
-  - [JSON To Kotlin Class](https://plugins.jetbrains.com/plugin/9960-json-to-kotlin-class-jsontokotlinclass-)
-  - [Key Promoter X](https://plugins.jetbrains.com/plugin/9792-key-promoter-x)
-  - [LeetCode Editor](https://plugins.jetbrains.com/plugin/12132-leetcode-editor)
-  - [Translation](https://plugins.jetbrains.com/plugin/8579-translation)
-  - [Chinese ​(Simplified)​ Language Pack](https://plugins.jetbrains.com/plugin/13710-chinese-simplified-language-pack----)
-  - [PlantUML integration](https://plugins.jetbrains.com/plugin/7017-plantuml-integration)
-  - [Markdown](https://plugins.jetbrains.com/plugin/7793-markdown)
-  - [GitToolBox](https://plugins.jetbrains.com/plugin/7499-gittoolbox)
-  - [Git Commit Template](https://plugins.jetbrains.com/plugin/9861-git-commit-template)
+依赖注入：Hilt。
 
-    <br/>
-- ## 包结构
-  > ![structure](https://github.com/tianhe-github/FastAndroid/blob/master/image/package_structure.png)
- 
-    <br/>
-- ## 预览
-  > ![gif_20210803_141405](https://github.com/tianhe-github/FastAndroid/blob/master/image/gif_20210803_141405.gif)
-                
+网络与数据：Retrofit、Gson、OkHttp Logging。
 
+图片：Coil、Coil GIF。
 
+分析与归因：Adjust、Install Referrer。
+
+按渠道可选：Firebase BOM / Analytics / Messaging。
+
+其他：AndroidX Browser。
+
+测试：JUnit 4、AndroidX JUnit、Espresso。

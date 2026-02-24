@@ -1,4 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-    <base-config cleartextTrafficPermitted="true" />
+    <!-- 开发环境配置 -->
+    <debug-overrides>
+        <trust-anchors>
+            <!-- 信任系统证书 -->
+            <certificates src="system" />
+            <!-- 信任用户证书 -->
+            <certificates src="user" />
+        </trust-anchors>
+    </debug-overrides>
+
+    <!-- 允许明文流量的域名 -->
+    <domain-config cleartextTrafficPermitted="true">
+        <!-- 允许访问本地服务器(模拟器) -->
+        <domain includeSubdomains="true">10.0.2.2</domain>
+    </domain-config>
+
+    <!-- 基础配置 其他所有域名默认使用安全连接 -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
 </network-security-config>

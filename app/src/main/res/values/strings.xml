@@ -1,44 +1,16 @@
 <resources>
-    <string name="app_name">FastAndroid</string>
-    <string name="sign_up">Sign Up</string>
-    <string name="log_in">Log In</string>
-    <string name="logout">Log out</string>
+    <string name="app_name">ABC</string>
+    <string name="copyright">Copyright © 2019-2025 ABC. All rights reserved.</string>
 
-    <string name="login_with_otp">Login With OTP</string>
-    <string name="login_with_password">Login With PassWord</string>
-    <string name="login_to_n_graduation_project">Login to \n Graduation Project</string>
-    <string name="qq_is_not_installed_on_the_current_device">QQ is not installed on the current device</string>
-    <string name="wechat_is_not_installed_on_the_current_device">WeChat is not installed on the current device</string>
-    <string name="third_party_login_error">Third party login error</string>
-    <string name="third_party_login_cancel">Third party login cancel</string>
-
-
-    <string name="enter_your_phone_number">Enter Your Phone Number</string>
-    <string name="enter_your_phone_otp">Enter Your Phone OTP</string>
-    <string name="enter_your_username">Enter Your Username</string>
-    <string name="enter_your_password">Enter Your PassWord</string>
-    <string name="enter_your_password_again">Enter Your PassWord Again</string>
-
-    <string name="verify">Verify</string>
-    <string name="submit">Submit</string>
-    <string name="get">get</string>
-    <string name="reget">Reget</string>n
-
-    <string name="china">China</string>
-    <string name="_86">+86</string>
-
-    <string name="the_network_is_abnormal_please_try_again_later">The network is abnormal, please try again later</string>
-    <string name="the_network_not_connected">The network not connected</string>
-    <string name="please_enter_the_correct_phone_number">Please enter the correct phone number</string>
-    <string name="can_t_receive_otp_try_audio_verify">Can\'t receive OTP? Try Audio verify.</string>
-    <string name="inconsistent_passwords">Inconsistent passwords ！</string>
-    <string name="the_length_of_the_password_is_at_least_6">The length of the password is at least 6</string>
-    <string name="username_cannot_be_empty">Username cannot be empty ！</string>
-    <string name="the_password_is_incorrect">The password is incorrect ！</string>
-    <string name="create_new_account">CREATE NEW ACCOUNT</string>
-
-    <string name="avatar">Avatar</string>
-    <string name="nickname">NickName</string>
-    <string name="download">Download</string>
-
+    <string name="new_version_found">New version found</string>
+    <string name="would_you_like_to_update_now">Would you like to update now?</string>
+    <string name="update">Update</string>
+    <string name="cancel">Cancel</string>
+    <string name="updating_progress">Updating: %1$s / %2$s </string>
+    <string name="upgrade_failed">Upgrade failed</string>
+    <string name="upgrade_completed">Upgrade completed</string>
+    <string name="connecting">Connecting... </string>
+    <string name="download_failed_desc">The update package failed to download. Please use your browser to download and install manually.</string>
+    <string name="open_browser">Open in Browser</string>
+    <string name="qr_saved_to_gallery">QR code has been saved to the gallery</string>
 </resources>

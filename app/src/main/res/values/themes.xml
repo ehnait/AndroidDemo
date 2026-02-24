@@ -1,30 +1,11 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
     <!-- Base application theme. -->
-    <style name="Theme.GraduationProject2011" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- 应用的主要色调，ActionBar Toolbar 默认使用该颜色 -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <!-- 应用的主要暗色调，状态栏默认使用该颜色 -->
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <!-- 应用的强调色，CheckBox RadioButton Switch 等一般控件的选中效果默认采用该颜色 -->
-        <item name="colorAccent">@color/colorAccent</item>
-
-        <!-- 窗口背景颜色 -->
-        <item name="android:windowBackground">@color/colorWindowBackground</item>
-        <!-- ActionMode 覆盖 Actionbar 不被顶下来 -->
-        <item name="windowActionModeOverlay">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <!-- ActionMode 的颜色 -->
-        <item name="actionModeBackground">@color/colorPrimary</item>
-        <!-- 解决 Android 5.1 及以上版本 Button 英文字符串自动变大写的问题 -->
-        <item name="android:textAllCaps">false</item>
-        <!-- 默认隐藏输入法，开启这个选项后会导致输入对话框在关闭之后不能关闭软键盘   -->
-        <!--<item name="android:windowSoftInputMode">stateHidden</item>-->
-        <!-- 关闭 RecyclerView ScrollView ViewPager 水波纹效果 -->
-        <item name="android:overScrollMode">never</item>
+    <style name="Base.Theme.A23" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.FullScreen" parent="Theme.GraduationProject2011">
-        <item name="android:windowFullscreen">true</item>
-    </style>
+    <style name="Theme.A23" parent="Base.Theme.A23" />
+
 </resources>
